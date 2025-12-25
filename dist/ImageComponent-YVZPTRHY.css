@@ -1,0 +1,75 @@
+/* src/nodes/ImageNode.css */
+.ImageNode__contentEditable {
+  min-height: 20px;
+  border: 0px;
+  resize: none;
+  cursor: text;
+  caret-color: rgb(5, 5, 5);
+  display: block;
+  position: relative;
+  outline: 0px;
+  padding: 10px;
+  user-select: text;
+  font-size: 12px;
+  width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+}
+.ImageNode__placeholder {
+  font-size: 12px;
+  color: #888;
+  overflow: hidden;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 10px;
+  left: 10px;
+  user-select: none;
+  white-space: nowrap;
+  display: inline-block;
+  pointer-events: none;
+}
+.image-control-wrapper--resizing {
+  touch-action: none;
+}
+
+/* src/ui/ContentEditable.css */
+.ContentEditable__root {
+  border: 0;
+  font-size: 15px;
+  display: block;
+  position: relative;
+  outline: 0;
+  padding: 1rem;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+@media (max-width: 1025px) {
+  .ContentEditable__root {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+.ContentEditable__placeholder {
+  font-size: 15px;
+  color: #999;
+  overflow: hidden;
+  position: absolute;
+  text-overflow: ellipsis;
+  top: 1rem;
+  left: 1rem;
+  right: 28px;
+  user-select: none;
+  white-space: nowrap;
+  display: inline-block;
+  pointer-events: none;
+}
+@media (max-width: 1025px) {
+  .ContentEditable__placeholder {
+    left: 8px;
+    right: 8px;
+  }
+}
+/*# sourceMappingURL=ImageComponent-YVZPTRHY.css.map */

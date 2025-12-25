@@ -1,0 +1,8 @@
+node_modules
+src
+example
+*.log
+.git
+.github
+tsconfig.json
+README.md

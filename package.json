@@ -1,0 +1,46 @@
+{
+  "name": "react-lexical-editor",
+  "version": "1.0.0",
+  "description": "A rich text editor based on Lexical with images, tables, links, etc.",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "lexical",
+    "rich-text",
+    "editor",
+    "react"
+  ],
+  "author": "SanMario",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamduy/react-lexical-editor.git"
+  },
+  "peerDependencies": {
+    "@lexical/html": "^0.39.0",
+    "@lexical/link": "^0.39.0",
+    "@lexical/list": "^0.39.0",
+    "@lexical/react": "^0.39.0",
+    "@lexical/rich-text": "^0.39.0",
+    "@lexical/selection": "^0.39.0",
+    "@lexical/table": "^0.39.0",
+    "@lexical/utils": "^0.39.0",
+    "lexical": "^0.39.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
