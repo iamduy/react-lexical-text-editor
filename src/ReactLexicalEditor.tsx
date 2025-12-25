@@ -5,7 +5,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TablePlugin } from '@lexical/react/LexicalTablePlugin';
-import { memo, useState } from 'react';
+import { useState } from 'react';
 
 import { useSettings } from './context/SettingsContext';
 import { useSharedHistoryContext } from './context/SharedHistoryContext';
@@ -16,10 +16,10 @@ import InitialValuePlugin from './plugins/InitialValuePlugin';
 import TableActionMenuPlugin from './plugins/TableActionMenuPlugin';
 import TableCellResizer from './plugins/TableCellResizer';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
+import { ReactLexicalEditorProps } from './types';
 import ContentEditable from './ui/ContentEditable';
 import LoadingLayer from './ui/LoadingLayer';
 import { lexicalToHtml } from './utils/htmlSerializer';
-import { ReactLexicalEditorProps } from './types';
 
 const Editor = ({
   value,
@@ -101,4 +101,4 @@ const Editor = ({
   );
 };
 
-export default memo(Editor);
+export default Editor;
