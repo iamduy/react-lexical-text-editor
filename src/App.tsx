@@ -2,14 +2,14 @@ import './App.css';
 
 import { LexicalCollaboration } from '@lexical/react/LexicalCollaborationContext';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
-import { SettingsContext } from './context/SettingsContext.js';
-import { SharedHistoryContext } from './context/SharedHistoryContext.js';
-import { ToolbarContext } from './context/ToolbarContext.js';
-import Editor from './ReactLexicalEditor.js';
-import PlaygroundNodes from './nodes/PlaygroundNodes.js';
-import { TableContext } from './plugins/TablePlugin.js';
-import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme.js';
-import { ReactLexicalEditorProps } from './types.js';
+import { SettingsContext } from './context/SettingsContext';
+import { SharedHistoryContext } from './context/SharedHistoryContext';
+import { ToolbarContext } from './context/ToolbarContext';
+import Editor from './ReactLexicalEditor';
+import PlaygroundNodes from './nodes/PlaygroundNodes';
+import { TableContext } from './plugins/TablePlugin';
+import PlaygroundEditorTheme from './themes/PlaygroundEditorTheme';
+import { ReactLexicalEditorProps } from './types';
 
 export default function App(props: ReactLexicalEditorProps) {
   const { disabled = false, ...rest } = props;
