@@ -16,7 +16,7 @@ import InitialValuePlugin from './plugins/InitialValuePlugin';
 import TableActionMenuPlugin from './plugins/TableActionMenuPlugin';
 import TableCellResizer from './plugins/TableCellResizer';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
-import { ReactEditorUltimateProps } from './types';
+import { ReactLexicalTextEditorProps } from './types';
 import ContentEditable from './ui/ContentEditable';
 import LoadingLayer from './ui/LoadingLayer';
 import { lexicalToHtml } from './utils/htmlSerializer';
@@ -29,7 +29,7 @@ const Editor = ({
   className,
   loading,
   style,
-}: ReactEditorUltimateProps) => {
+}: ReactLexicalTextEditorProps) => {
   const {
     settings: { isRichText },
   } = useSettings();
