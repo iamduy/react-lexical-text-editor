@@ -1,8 +1,5 @@
 node_modules
 src
-example
-*.log
-.git
-.github
+rollup.config.js
 tsconfig.json
-README.md
+.gitignore
