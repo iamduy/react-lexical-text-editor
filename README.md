@@ -578,7 +578,7 @@ function EmailTemplateEditor() {
 npm install
 
 # Build the package
-npm run rollup
+npm run build
 
 # The output will be in the dist/ folder
 ```
