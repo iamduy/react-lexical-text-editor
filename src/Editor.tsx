@@ -1,5 +1,5 @@
 // React and hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Lexical core plugins
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
@@ -17,9 +17,11 @@ import { useSharedHistoryContext } from './context/SharedHistoryContext';
 import AutoLinkPlugin from './plugins/AutoLinkPlugin';
 import DragDropPlugin from './plugins/DragDropPlugin';
 import FloatingLinkEditorPlugin from './plugins/FloatingLinkEditorPlugin';
+import FloatingTextFormatToolbarPlugin from './plugins/FloatingTextFormatToolbarPlugin';
 import ImagesPlugin from './plugins/ImagesPlugin';
 import InitialValuePlugin from './plugins/InitialValuePlugin';
 import LinkPlugin from './plugins/LinkPlugin';
+import ShortcutsPlugin from './plugins/ShortcutsPlugin';
 import TableActionMenuPlugin from './plugins/TableActionMenuPlugin';
 import TableCellResizer from './plugins/TableCellResizer';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
@@ -29,6 +31,8 @@ import ContentEditable from './ui/ContentEditable';
 import LoadingLayer from './ui/LoadingLayer';
 
 // Types and utils
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { CAN_USE_DOM } from '@lexical/utils';
 import { ReactLexicalTextEditorProps } from './types';
 import { lexicalToHtml } from './utils/htmlSerializer';
 
@@ -47,6 +51,10 @@ const Editor = ({
   const { historyState } = useSharedHistoryContext();
   const [floatingAnchorElem, setFloatingAnchorElem] =
     useState<HTMLDivElement | null>(null);
+  const [isSmallWidthViewport, setIsSmallWidthViewport] =
+    useState<boolean>(false);
+  const [editor] = useLexicalComposerContext();
+  const [activeEditor, setActiveEditor] = useState(editor);
 
   const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
   const onRef = (_floatingAnchorElem: HTMLDivElement) => {
@@ -55,6 +63,23 @@ const Editor = ({
     }
   };
 
+  useEffect(() => {
+    const updateViewPortWidth = () => {
+      const isNextSmallWidthViewport =
+        CAN_USE_DOM && window.matchMedia('(max-width: 1025px)').matches;
+
+      if (isNextSmallWidthViewport !== isSmallWidthViewport) {
+        setIsSmallWidthViewport(isNextSmallWidthViewport);
+      }
+    };
+    updateViewPortWidth();
+    window.addEventListener('resize', updateViewPortWidth);
+
+    return () => {
+      window.removeEventListener('resize', updateViewPortWidth);
+    };
+  }, [isSmallWidthViewport]);
+
   return (
     <div className={`editor-shell ${className}`}>
       {/* Loading overlay */}
@@ -62,8 +87,18 @@ const Editor = ({
 
       {isRichText && (
         <ToolbarPlugin
+          editor={editor}
+          activeEditor={activeEditor}
+          setActiveEditor={setActiveEditor}
           setIsLinkEditMode={setIsLinkEditMode}
           onUpload={onUpload}
+        />
+      )}
+
+      {isRichText && (
+        <ShortcutsPlugin
+          editor={activeEditor}
+          setIsLinkEditMode={setIsLinkEditMode}
         />
       )}
       <div className='editor-container'>
@@ -85,6 +120,7 @@ const Editor = ({
         <LinkPlugin />
         <TablePlugin />
         <TableCellResizer />
+
         {floatingAnchorElem && (
           <>
             <FloatingLinkEditorPlugin
@@ -95,6 +131,14 @@ const Editor = ({
             <TableActionMenuPlugin
               anchorElem={floatingAnchorElem}
               cellMerge={true}
+            />
+          </>
+        )}
+        {floatingAnchorElem && (
+          <>
+            <FloatingTextFormatToolbarPlugin
+              anchorElem={floatingAnchorElem}
+              setIsLinkEditMode={setIsLinkEditMode}
             />
           </>
         )}
