@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 
@@ -18,6 +17,7 @@ import AutoLinkPlugin from "./plugins/AutoLinkPlugin";
 import DragDropPlugin from "./plugins/DragDropPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
+import HtmlOnChangePlugin from "./plugins/HtmlOnChangePlugin";
 import ImagesPlugin from "./plugins/ImagesPlugin";
 import InitialValuePlugin from "./plugins/InitialValuePlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
@@ -33,9 +33,8 @@ import LoadingLayer from "./ui/LoadingLayer";
 // Types and utils
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { CAN_USE_DOM } from "@lexical/utils";
-import { ReactLexicalTextEditorProps } from "./types";
-import { lexicalToHtml } from "./utils/htmlSerializer";
 import { ImagePasteUploadPlugin } from "./plugins/ImagePasteUploadPlugin";
+import { ReactLexicalTextEditorProps } from "./types";
 
 const Editor = ({
   value,
@@ -46,6 +45,8 @@ const Editor = ({
   loading,
   style,
   toolbarConfig,
+  name,
+  ignoreSelectionChange,
 }: ReactLexicalTextEditorProps) => {
   const {
     settings: { isRichText, hasLinkAttributes },
@@ -138,11 +139,11 @@ const Editor = ({
         <DragDropPlugin onUpload={onUpload} />
         <LinkPlugin hasLinkAttributes={hasLinkAttributes} />
         <InitialValuePlugin value={value} />
-        <OnChangePlugin
-          onChange={(editorState, editor) => {
-            const html = lexicalToHtml(editor, editorState);
-            onChange?.(html);
-          }}
+
+        <HtmlOnChangePlugin
+          onChange={onChange}
+          ignoreSelectionChange={ignoreSelectionChange}
+          name={name}
         />
         <AutoLinkPlugin />
         <ImagePasteUploadPlugin onUpload={onUpload} />

@@ -71,17 +71,17 @@ pnpm add react-lexical-text-editor
 ### Basic Usage
 
 ```tsx
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import 'react-lexical-text-editor/dist/index.css'; // Import styles
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css"; // Import styles
 
 function App() {
-  const [content, setContent] = useState<string>('');
+  const [content, setContent] = useState<string>("");
 
   return (
     <ReactLexicalTextEditor
       value={content}
       onChange={(html) => setContent(html)}
-      placeholder='Start typing...'
+      placeholder="Start typing..."
     />
   );
 }
@@ -90,8 +90,8 @@ function App() {
 ### With Initial Content
 
 ```tsx
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import 'react-lexical-text-editor/dist/index.css';
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css";
 
 function App() {
   const initialContent = `
@@ -102,7 +102,7 @@ function App() {
   return (
     <ReactLexicalTextEditor
       value={initialContent}
-      onChange={(html) => console.log('Content changed:', html)}
+      onChange={(html) => console.log("Content changed:", html)}
     />
   );
 }
@@ -111,34 +111,31 @@ function App() {
 ### With Image Upload
 
 ```tsx
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import 'react-lexical-text-editor/dist/index.css';
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css";
 
 function App() {
   const handleImageUpload = async (file: File): Promise<string | undefined> => {
     try {
       // Upload to your server/CDN
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append("image", file);
 
-      const response = await fetch('/api/upload', {
-        method: 'POST',
+      const response = await fetch("/api/upload", {
+        method: "POST",
         body: formData,
       });
 
       const data = await response.json();
       return data.url; // Return the uploaded image URL
     } catch (error) {
-      console.error('Upload failed:', error);
+      console.error("Upload failed:", error);
       return undefined;
     }
   };
 
   return (
-    <ReactLexicalTextEditor
-      onUpload={handleImageUpload}
-      onChange={(html) => console.log(html)}
-    />
+    <ReactLexicalTextEditor onUpload={handleImageUpload} onChange={(html) => console.log(html)} />
   );
 }
 ```
@@ -146,18 +143,18 @@ function App() {
 ### With Custom Styling
 
 ```tsx
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import 'react-lexical-text-editor/dist/index.css';
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css";
 
 function App() {
   return (
     <ReactLexicalTextEditor
-      className='my-custom-editor'
+      className="my-custom-editor"
       style={{
-        minHeight: '300px',
-        maxHeight: '600px',
+        minHeight: "300px",
+        maxHeight: "600px",
       }}
-      placeholder='Write something amazing...'
+      placeholder="Write something amazing..."
       onChange={(html) => console.log(html)}
     />
   );
@@ -167,18 +164,18 @@ function App() {
 ### With Loading State
 
 ```tsx
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import 'react-lexical-text-editor/dist/index.css';
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
 
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      await fetch('/api/save', {
-        method: 'POST',
+      await fetch("/api/save", {
+        method: "POST",
         body: JSON.stringify({ content }),
       });
     } finally {
@@ -188,11 +185,7 @@ function App() {
 
   return (
     <div>
-      <ReactLexicalTextEditor
-        value={content}
-        onChange={setContent}
-        loading={isLoading}
-      />
+      <ReactLexicalTextEditor value={content} onChange={setContent} loading={isLoading} />
       <button onClick={handleSave}>Save</button>
     </div>
   );
@@ -205,17 +198,20 @@ function App() {
 
 #### `ReactLexicalEditorProps`
 
-| Prop            | Type                                           | Default           | Description                                                                        |
-| --------------- | ---------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------- |
-| `value`         | `string`                                       | `undefined`       | HTML content to initialize or control the editor. Can be used for controlled mode. |
-| `onChange`      | `(html: string) => void`                       | `undefined`       | Callback fired when editor content changes. Receives HTML string.                  |
-| `onUpload`      | `(file: File) => Promise<string \| undefined>` | `undefined`       | Async function to handle image uploads. Must return the uploaded image URL.        |
-| `placeholder`   | `string`                                       | `"Enter text..."` | Placeholder text shown when editor is empty.                                       |
-| `className`     | `string`                                       | `undefined`       | Additional CSS class name for the editor container.                                |
-| `style`         | `React.CSSProperties`                          | `undefined`       | Inline styles for the editor content area.                                         |
-| `loading`       | `boolean`                                      | `false`           | Shows loading overlay when true. Useful during save operations.                    |
-| `disabled`      | `boolean`                                      | `false`           | Disables editing when true (read-only mode).                                       |
-| `toolbarConfig` | `ToolbarConfig`                                | `{}`              | Configuration object to customize toolbar visibility. See Toolbar Configuration.   |
+| Prop                    | Type                                           | Default           | Description                                                                                               |
+| ----------------------- | ---------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
+| `value`                 | `string`                                       | `undefined`       | HTML content to initialize or control the editor. Can be used for controlled mode.                        |
+| `onChange`              | `(html: string) => void`                       | `undefined`       | Callback fired when editor content changes. Receives HTML string.                                         |
+| `onUpload`              | `(file: File) => Promise<string \| undefined>` | `undefined`       | Async function to handle image uploads. Must return the uploaded image URL.                               |
+| `placeholder`           | `string`                                       | `"Enter text..."` | Placeholder text shown when editor is empty.                                                              |
+| `className`             | `string`                                       | `undefined`       | Additional CSS class name for the editor container.                                                       |
+| `style`                 | `React.CSSProperties`                          | `undefined`       | Inline styles for the editor content area.                                                                |
+| `loading`               | `boolean`                                      | `false`           | Shows loading overlay when true. Useful during save operations.                                           |
+| `disabled`              | `boolean`                                      | `false`           | Disables editing when true (read-only mode).                                                              |
+| `toolbarConfig`         | `ToolbarConfig`                                | `{}`              | Configuration object to customize toolbar visibility. See Toolbar Configuration.                          |
+| `name`                  | `string`                                       | `undefined`       | Name attribute for the hidden input field. Enables native form integration.                               |
+| `id`                    | `string`                                       | `undefined`       | ID attribute for the hidden input field.                                                                  |
+| `ignoreSelectionChange` | `boolean`                                      | `false`           | If true, `onChange` will not be triggered when only the selection changes (e.g. clicking/caret movement). |
 
 ### Toolbar Configuration
 
@@ -433,10 +429,7 @@ interface ToolbarConfig {
 ### Types
 
 ```typescript
-import type {
-  ReactLexicalEditorProps,
-  ToolbarConfig,
-} from 'react-lexical-text-editor';
+import type { ReactLexicalEditorProps, ToolbarConfig } from "react-lexical-text-editor";
 
 interface ReactLexicalEditorProps {
   value?: string;
@@ -448,6 +441,9 @@ interface ReactLexicalEditorProps {
   disabled?: boolean;
   style?: React.CSSProperties;
   toolbarConfig?: ToolbarConfig;
+  name?: string;
+  id?: string;
+  ignoreSelectionChange?: boolean;
 }
 
 interface ToolbarConfig {
@@ -508,7 +504,7 @@ interface ToolbarConfig {
 Import the default stylesheet in your app:
 
 ```tsx
-import 'react-lexical-text-editor/dist/index.css';
+import "react-lexical-text-editor/dist/index.css";
 ```
 
 ### Custom Styling
@@ -534,7 +530,7 @@ Override default styles using CSS:
 .editor {
   min-height: 200px;
   padding: 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   line-height: 1.6;
 }
@@ -577,9 +573,9 @@ Override default styles using CSS:
 ### Form Integration (React Hook Form)
 
 ```tsx
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import { useForm, Controller } from 'react-hook-form';
-import 'react-lexical-text-editor/dist/index.css';
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import { useForm, Controller } from "react-hook-form";
+import "react-lexical-text-editor/dist/index.css";
 
 interface FormData {
   title: string;
@@ -590,28 +586,28 @@ function MyForm() {
   const { control, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
-    console.log('Form data:', data);
+    console.log("Form data:", data);
     // Send to API
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input name='title' placeholder='Title' />
+      <input name="title" placeholder="Title" />
 
       <Controller
-        name='content'
+        name="content"
         control={control}
-        defaultValue=''
+        defaultValue=""
         render={({ field }) => (
           <ReactLexicalTextEditor
             value={field.value}
             onChange={field.onChange}
-            placeholder='Write your content...'
+            placeholder="Write your content..."
           />
         )}
       />
 
-      <button type='submit'>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 }
@@ -620,9 +616,9 @@ function MyForm() {
 ### With State Management (Zustand)
 
 ```tsx
-import { create } from 'zustand';
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import 'react-lexical-text-editor/dist/index.css';
+import { create } from "zustand";
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css";
 
 interface EditorStore {
   content: string;
@@ -630,7 +626,7 @@ interface EditorStore {
 }
 
 const useEditorStore = create<EditorStore>((set) => ({
-  content: '',
+  content: "",
   setContent: (content) => set({ content }),
 }));
 
@@ -644,17 +640,14 @@ function Editor() {
 ### Server-Side Rendering (Next.js)
 
 ```tsx
-'use client'; // Mark as client component in Next.js 13+
+"use client"; // Mark as client component in Next.js 13+
 
-import dynamic from 'next/dynamic';
-import 'react-lexical-text-editor/dist/index.css';
+import dynamic from "next/dynamic";
+import "react-lexical-text-editor/dist/index.css";
 
 // Dynamically import to avoid SSR issues
 const ReactLexicalTextEditor = dynamic(
-  () =>
-    import('react-lexical-text-editor').then(
-      (mod) => mod.ReactLexicalTextEditor
-    ),
+  () => import("react-lexical-text-editor").then((mod) => mod.ReactLexicalTextEditor),
   {
     ssr: false,
     loading: () => <div>Loading editor...</div>,
@@ -669,27 +662,27 @@ export default function Page() {
 ### Auto-Save Implementation
 
 ```tsx
-import { useState, useEffect } from 'react';
-import { ReactLexicalTextEditor } from 'react-lexical-text-editor';
-import { useDebouncedCallback } from 'use-debounce';
-import 'react-lexical-text-editor/dist/index.css';
+import { useState, useEffect } from "react";
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import { useDebouncedCallback } from "use-debounce";
+import "react-lexical-text-editor/dist/index.css";
 
 function AutoSaveEditor() {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
 
   const saveToServer = async (html: string) => {
     setIsSaving(true);
     try {
-      await fetch('/api/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("/api/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: html }),
       });
       setLastSaved(new Date());
     } catch (error) {
-      console.error('Save failed:', error);
+      console.error("Save failed:", error);
     } finally {
       setIsSaving(false);
     }
@@ -704,17 +697,11 @@ function AutoSaveEditor() {
 
   return (
     <div>
-      <div style={{ marginBottom: '8px', color: '#666' }}>
-        {isSaving && 'Saving...'}
-        {lastSaved &&
-          !isSaving &&
-          `Last saved: ${lastSaved.toLocaleTimeString()}`}
+      <div style={{ marginBottom: "8px", color: "#666" }}>
+        {isSaving && "Saving..."}
+        {lastSaved && !isSaving && `Last saved: ${lastSaved.toLocaleTimeString()}`}
       </div>
-      <ReactLexicalTextEditor
-        value={content}
-        onChange={handleChange}
-        loading={isSaving}
-      />
+      <ReactLexicalTextEditor value={content} onChange={handleChange} loading={isSaving} />
     </div>
   );
 }
@@ -767,23 +754,23 @@ The editor uses **HTML** as its content format:
 ```tsx
 function BlogEditor() {
   const [post, setPost] = useState({
-    title: '',
-    content: '',
+    title: "",
+    content: "",
   });
 
   return (
     <div>
       <input
-        type='text'
+        type="text"
         value={post.title}
         onChange={(e) => setPost({ ...post, title: e.target.value })}
-        placeholder='Post title'
+        placeholder="Post title"
       />
       <ReactLexicalTextEditor
         value={post.content}
         onChange={(html) => setPost({ ...post, content: html })}
         onUpload={uploadToCloudinary}
-        placeholder='Write your blog post...'
+        placeholder="Write your blog post..."
       />
     </div>
   );
@@ -794,15 +781,15 @@ function BlogEditor() {
 
 ```tsx
 function CommentEditor({ onSubmit }: { onSubmit: (html: string) => void }) {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   return (
     <div>
       <ReactLexicalTextEditor
         value={comment}
         onChange={setComment}
-        placeholder='Write a comment...'
-        style={{ minHeight: '100px' }}
+        placeholder="Write a comment..."
+        style={{ minHeight: "100px" }}
       />
       <button onClick={() => onSubmit(comment)}>Post Comment</button>
     </div>
@@ -814,11 +801,11 @@ function CommentEditor({ onSubmit }: { onSubmit: (html: string) => void }) {
 
 ```tsx
 function EmailTemplateEditor() {
-  const [template, setTemplate] = useState('');
+  const [template, setTemplate] = useState("");
 
   const handleSave = async () => {
-    await fetch('/api/email-templates', {
-      method: 'POST',
+    await fetch("/api/email-templates", {
+      method: "POST",
       body: JSON.stringify({ html: template }),
     });
   };
@@ -829,7 +816,7 @@ function EmailTemplateEditor() {
       <ReactLexicalTextEditor
         value={template}
         onChange={setTemplate}
-        placeholder='Design your email template...'
+        placeholder="Design your email template..."
       />
       <button onClick={handleSave}>Save Template</button>
     </div>
@@ -891,7 +878,7 @@ yarn add file:/path/to/react-lexical-text-editor-1.0.0.tgz
 Make sure you import the CSS file:
 
 ```tsx
-import 'react-lexical-text-editor/dist/index.css';
+import "react-lexical-text-editor/dist/index.css";
 ```
 
 ### SSR/Next.js issues
@@ -900,8 +887,7 @@ Use dynamic import with `ssr: false`:
 
 ```tsx
 const Editor = dynamic(
-  () =>
-    import('react-lexical-text-editor').then((m) => m.ReactLexicalTextEditor),
+  () => import("react-lexical-text-editor").then((m) => m.ReactLexicalTextEditor),
   { ssr: false }
 );
 ```
