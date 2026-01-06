@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import { COMMAND_PRIORITY_HIGH, PASTE_COMMAND } from "lexical";
 import { $generateNodesFromDOM } from "@lexical/html";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { $getRoot, $insertNodes } from "lexical";
+import { $insertNodes, COMMAND_PRIORITY_HIGH, PASTE_COMMAND } from "lexical";
+import { useEffect } from "react";
 import { base64ToFile, getImageUrlOrBase64 } from "../utils/imageUpload";
 import { INSERT_IMAGE_COMMAND } from "./ImagesPlugin";
 
@@ -34,7 +33,6 @@ export function ImagePasteUploadPlugin({ onUpload }: Props) {
 
       editor.update(() => {
         const nodes = $generateNodesFromDOM(editor, doc);
-        $getRoot().select();
         $insertNodes(nodes);
       });
     };
@@ -47,8 +45,17 @@ export function ImagePasteUploadPlugin({ onUpload }: Props) {
         const html = event.clipboardData.getData("text/html");
         if (!html) return false;
 
-        event.preventDefault();
+        // Parse HTML to check for images
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const images = doc.querySelectorAll("img");
 
+        // If no images, let other plugins handle the paste
+        if (images.length === 0) {
+          return false;
+        }
+
+        event.preventDefault();
         void handlePaste(html);
         return true;
       },

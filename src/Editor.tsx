@@ -19,7 +19,7 @@ import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
 import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
 import HtmlOnChangePlugin from "./plugins/HtmlOnChangePlugin";
 import ImagesPlugin from "./plugins/ImagesPlugin";
-import InitialValuePlugin from "./plugins/InitialValuePlugin";
+import InitializationPlugin from "./plugins/InitializationPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import ShortcutsPlugin from "./plugins/ShortcutsPlugin";
 import TableActionMenuPlugin from "./plugins/TableActionMenuPlugin";
@@ -138,8 +138,7 @@ const Editor = ({
         <ImagesPlugin />
         <DragDropPlugin onUpload={onUpload} />
         <LinkPlugin hasLinkAttributes={hasLinkAttributes} />
-        <InitialValuePlugin value={value} />
-
+        <InitializationPlugin editor={editor} value={value} />
         <HtmlOnChangePlugin
           onChange={onChange}
           ignoreSelectionChange={ignoreSelectionChange}

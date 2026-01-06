@@ -1,11 +1,14 @@
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { LexicalEditor } from "lexical";
 import { useEffect, useState } from "react";
-import { htmlToLexical } from "../utils";
 import { TAGS } from "../constants/tag";
+import { htmlToLexical } from "../utils";
 
-// Plugin để đồng bộ value từ ngoài vào editor (Initial load)
-export default function InitialValuePlugin({ value }: { value?: string }) {
-  const [editor] = useLexicalComposerContext();
+type Props = {
+  editor: LexicalEditor;
+  value?: string;
+};
+
+export default function InitializationPlugin({ editor, value }: Props) {
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
