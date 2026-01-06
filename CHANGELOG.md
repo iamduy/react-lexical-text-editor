@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.6] - 2026-01-06
+
+### Fixed
+
+- **HtmlOnChangePlugin**: Fixed an issue where `onChange` was triggered during the initial rendering of the editor. Added logic to tag initialization updates and ignore them in `HtmlOnChangePlugin` using a new `TAGS` constant.
+
 ## [1.0.5] - 2026-01-05
 
 ### Added

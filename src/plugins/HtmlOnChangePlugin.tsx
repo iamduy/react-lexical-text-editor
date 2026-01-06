@@ -1,6 +1,7 @@
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { useRef } from "react";
 import { lexicalToHtml } from "../utils";
+import { TAGS } from "../constants/tag";
 
 interface Props {
   name?: string;
@@ -14,7 +15,9 @@ export default function HtmlOnChangePlugin({ onChange, ignoreSelectionChange, na
     <>
       <OnChangePlugin
         ignoreSelectionChange={ignoreSelectionChange}
-        onChange={(editorState, editor) => {
+        onChange={(editorState, editor, tags) => {
+          if (tags.has(TAGS.INITIALIZATION)) return;
+
           const html = lexicalToHtml(editor, editorState);
 
           if (hiddenInputRef.current) {

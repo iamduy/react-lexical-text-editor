@@ -24,7 +24,7 @@ export const lexicalToHtml = (editor: LexicalEditor, editorState: EditorState): 
 /**
  * Chuyển đổi HTML string sang Lexical nodes và chèn vào editor
  */
-export const htmlToLexical = (editor: LexicalEditor, html: string) => {
+export const htmlToLexical = (editor: LexicalEditor, html: string, options?: { tag?: string }) => {
   editor.update(() => {
     const parser = new DOMParser();
     const dom = parser.parseFromString(html || "", "text/html");
@@ -33,5 +33,5 @@ export const htmlToLexical = (editor: LexicalEditor, html: string) => {
     const root = $getRoot();
     root.clear();
     root.append(...nodes);
-  });
+  }, options);
 };
