@@ -78,7 +78,6 @@
     "@lexical/utils": "^0.39.0",
     "@lexical/yjs": "^0.39.0",
     "lexical": "^0.39.0",
-    "yjs": "^13.6.28",
-    "y-websocket": "^1.5.4"
+    "yjs": "^13.6.28"
   }
 }
