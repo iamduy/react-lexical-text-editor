@@ -1,5 +1,7 @@
 # react-lexical-text-editor
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/iamduy/react-lexical-text-editor)
+
 A powerful, feature-rich WYSIWYG editor built with [Lexical](https://lexical.dev/) for React applications. Provides an intuitive editing experience with support for images, tables, links, and extensive text formatting.
 
 ## ✨ Features

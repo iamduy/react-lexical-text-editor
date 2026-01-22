@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.11] - 2026-01-22
+
+### Added
+
+- **DeepWiki Integration**: Added DeepWiki badge to README for AI-powered documentation assistance.
+- **Homepage Field**: Added `homepage` field in package.json pointing to DeepWiki documentation page for better package discoverability.
+
+### Changed
+
+- **Documentation**: Enhanced README with DeepWiki badge linking to interactive AI documentation.
+
 ## [1.0.9] - 2026-01-19
 
 ### Added
