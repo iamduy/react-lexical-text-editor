@@ -1,6 +1,6 @@
 {
   "name": "react-lexical-text-editor",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "type": "module",
   "description": "A rich text editor based on Lexical with images, tables, links, etc.",
   "main": "dist/index.js",
