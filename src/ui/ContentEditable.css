@@ -13,8 +13,8 @@
   position: relative;
   outline: 0;
   padding: 1rem;
-  min-height: 200px;
-  max-height: 400px;
+  /* min-height: 200px;
+  max-height: 400px; */
   overflow-y: auto;
 }
 @media (max-width: 1025px) {

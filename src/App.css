@@ -23,6 +23,7 @@
   display: block;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  min-height: 5rem;
 }
 
 .editor-shell .editor-container.tree-view {
@@ -35,22 +36,42 @@
 }
 
 .editor-scroller {
-  min-height: 150px;
+  min-height: var(--editor-min-height, 150px);
   max-width: 100%;
   border: 0;
   display: flex;
   position: relative;
   outline: 0;
   z-index: 0;
-  resize: vertical;
+  height: var(--editor-height, auto);
+  overflow-y: var(--editor-overflow-y, auto);
+  resize: var(--editor-resize, none);
+}
+
+.editor-scroller-auto-resize {
+  --editor-height: auto;
+  --editor-overflow-y: hidden;
+  --editor-resize: none;
+}
+
+.editor-scroller-auto-resize.editor-scroller-resizable {
+  --editor-overflow-y: auto;
+  --editor-resize: vertical;
+}
+
+.editor-scroller-resizable {
+  --editor-resize: vertical;
 }
 
 .editor {
   flex: auto;
   max-width: 100%;
   position: relative;
-  resize: vertical;
   z-index: -1;
+}
+
+.editor-resize {
+  overflow: auto;
 }
 
 .test-recorder-output {
@@ -93,7 +114,7 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .editor-dev-button::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 10px;
   right: 10px;
@@ -141,7 +162,7 @@ pre::-webkit-scrollbar-thumb {
 }
 
 .test-recorder-button::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 8px;
   right: 8px;
@@ -714,7 +735,9 @@ i.page-break,
   z-index: 100;
   display: block;
   position: fixed;
-  box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1),
+  box-shadow:
+    0 12px 28px 0 rgba(0, 0, 0, 0.2),
+    0 2px 4px 0 rgba(0, 0, 0, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   min-height: 40px;
@@ -950,11 +973,11 @@ i.page-break,
   transition: transform 0.2s;
 }
 
-.switch button[aria-checked='true'] {
+.switch button[aria-checked="true"] {
   background-color: rgb(24, 119, 242);
 }
 
-.switch button[aria-checked='true'] span {
+.switch button[aria-checked="true"] span {
   transform: translateX(20px);
 }
 
