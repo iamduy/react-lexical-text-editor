@@ -16,4 +16,8 @@ export interface ReactLexicalTextEditorProps {
   toolbarConfig?: ToolbarConfig;
   name?: string;
   ignoreSelectionChange?: boolean;
+  resize?: boolean;
+  rows?: number;
+  cols?: number;
+  autoResize?: boolean;
 }

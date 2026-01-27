@@ -47,6 +47,10 @@ const Editor = ({
   toolbarConfig,
   name,
   ignoreSelectionChange,
+  resize = false,
+  rows,
+  cols,
+  autoResize = false,
 }: ReactLexicalTextEditorProps) => {
   const {
     settings: { isRichText, hasLinkAttributes },
@@ -81,8 +85,26 @@ const Editor = ({
     };
   }, [isSmallWidthViewport]);
 
+  const scrollerClasses = [
+    "editor-scroller",
+    autoResize && "editor-scroller-auto-resize",
+    resize && "editor-scroller-resizable",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const scrollerStyles = {
+    "--editor-min-height": rows ? `${rows * 1.7}em` : undefined,
+    "--editor-height": !autoResize && rows ? `${rows * 1.7}em` : undefined,
+  } as React.CSSProperties;
+
   return (
-    <div className={`editor-shell ${className}`}>
+    <div
+      className={`editor-shell ${className}`}
+      style={{
+        ...(cols ? { width: `${cols}ch` } : {}),
+      }}
+    >
       {/* Loading overlay */}
       {loading && <LoadingLayer />}
 
@@ -100,12 +122,18 @@ const Editor = ({
       {isRichText && (
         <ShortcutsPlugin editor={activeEditor} setIsLinkEditMode={setIsLinkEditMode} />
       )}
-      <div className="editor-container">
+      <div className={`editor-container ${resize ? "editor-resize" : ""}`}>
         <RichTextPlugin
           contentEditable={
-            <div className="editor-scroller">
+            <div className={scrollerClasses} style={scrollerStyles}>
               <div className="editor" ref={onRef}>
-                <ContentEditable style={style} placeholder={placeholder || "Enter text..."} />
+                <ContentEditable
+                  style={{
+                    ...style,
+                    ...(autoResize && !resize ? { height: "auto", overflowY: "hidden" } : {}),
+                  }}
+                  placeholder={placeholder || "Enter text..."}
+                />
               </div>
             </div>
           }
