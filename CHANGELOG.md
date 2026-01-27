@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.0.12] - 2026-01-27
+
+### Added
+
+- **Sizing Props**: Added `rows` and `cols` props to control editor dimensions.
+  - `rows`: Sets height in text rows.
+  - `cols`: Sets width in character units (`ch`).
+- **Resizing Features**:
+  - `autoResize`: Enables automatic growth based on content.
+  - `resize`: Enables a manual vertical resize handle.
+- **Improved Style Logic**: Refactored internal styling to use CSS variables and classes, ensuring better performance and clean overrides.
+
+### Changed
+
+- **Editor Scroller**: Optimized height and overflow handling to prevent unwanted layout shifts during content updates.
+
 ## [1.0.11] - 2026-01-22
 
 ### Added
@@ -64,7 +80,7 @@
 ### Added
 
 - **Form Integration**: Added `name` and `id` props to support native HTML form integration. The editor now renders a hidden input that mirrors the content, allowing it to participate in standard form submissions and trigger `onChange` events on parent forms.
-- **Performance**: Added `ignoreSelectionChange` prop to `OnChangePlugin` to prevent unnecessary re-renders and callbacks when only the selection changes.
+- **Performance**: Added `ignoreSelectionChange` prop to `OnChangePlugin` to prevent unnecessary re-renders and callbacks when only the selection changes (e.g. clicking/caret movement).
 
 ## [1.0.4] - 2026-01-01
 

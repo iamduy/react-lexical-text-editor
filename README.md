@@ -163,6 +163,42 @@ function App() {
 }
 ```
 
+### With Custom Sizing
+
+```tsx
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css";
+
+function App() {
+  return (
+    <ReactLexicalTextEditor
+      rows={10} // Fixed initial height of 10 rows
+      cols={80} // Fixed width of 80 characters
+      resize={true} // Enable manual resize handle
+      autoResize={false} // Disable automatic height adjustment
+      placeholder="Type here..."
+    />
+  );
+}
+```
+
+### With Auto-Resize
+
+```tsx
+import { ReactLexicalTextEditor } from "react-lexical-text-editor";
+import "react-lexical-text-editor/dist/index.css";
+
+function App() {
+  return (
+    <ReactLexicalTextEditor
+      autoResize={true} // Grows automatically with content
+      rows={5} // Minimum height of 5 rows
+      placeholder="This editor grows as you type..."
+    />
+  );
+}
+```
+
 ### With Loading State
 
 ```tsx
@@ -200,20 +236,24 @@ function App() {
 
 #### `ReactLexicalEditorProps`
 
-| Prop                    | Type                                           | Default           | Description                                                                                               |
-| ----------------------- | ---------------------------------------------- | ----------------- | --------------------------------------------------------------------------------------------------------- |
-| `value`                 | `string`                                       | `undefined`       | HTML content to initialize or control the editor. Can be used for controlled mode.                        |
-| `onChange`              | `(html: string) => void`                       | `undefined`       | Callback fired when editor content changes. Receives HTML string.                                         |
-| `onUpload`              | `(file: File) => Promise<string \| undefined>` | `undefined`       | Async function to handle image uploads. Must return the uploaded image URL.                               |
-| `placeholder`           | `string`                                       | `"Enter text..."` | Placeholder text shown when editor is empty.                                                              |
-| `className`             | `string`                                       | `undefined`       | Additional CSS class name for the editor container.                                                       |
-| `style`                 | `React.CSSProperties`                          | `undefined`       | Inline styles for the editor content area.                                                                |
-| `loading`               | `boolean`                                      | `false`           | Shows loading overlay when true. Useful during save operations.                                           |
-| `disabled`              | `boolean`                                      | `false`           | Disables editing when true (read-only mode).                                                              |
-| `toolbarConfig`         | `ToolbarConfig`                                | `{}`              | Configuration object to customize toolbar visibility. See Toolbar Configuration.                          |
-| `name`                  | `string`                                       | `undefined`       | Name attribute for the hidden input field. Enables native form integration.                               |
-| `id`                    | `string`                                       | `undefined`       | ID attribute for the hidden input field.                                                                  |
-| `ignoreSelectionChange` | `boolean`                                      | `false`           | If true, `onChange` will not be triggered when only the selection changes (e.g. clicking/caret movement). |
+| Prop                    | Type                                           | Default           | Description                                                                                                            |
+| ----------------------- | ---------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `value`                 | `string`                                       | `undefined`       | HTML content to initialize or control the editor. Can be used for controlled mode.                                     |
+| `onChange`              | `(html: string) => void`                       | `undefined`       | Callback fired when editor content changes. Receives HTML string.                                                      |
+| `onUpload`              | `(file: File) => Promise<string \| undefined>` | `undefined`       | Async function to handle image uploads. Must return the uploaded image URL.                                            |
+| `placeholder`           | `string`                                       | `"Enter text..."` | Placeholder text shown when editor is empty.                                                                           |
+| `className`             | `string`                                       | `undefined`       | Additional CSS class name for the editor container.                                                                    |
+| `style`                 | `React.CSSProperties`                          | `undefined`       | Inline styles for the editor content area.                                                                             |
+| `loading`               | `boolean`                                      | `false`           | Shows loading overlay when true. Useful during save operations.                                                        |
+| `disabled`              | `boolean`                                      | `false`           | Disables editing when true (read-only mode).                                                                           |
+| `toolbarConfig`         | `ToolbarConfig`                                | `{}`              | Configuration object to customize toolbar visibility. See Toolbar Configuration.                                       |
+| `name`                  | `string`                                       | `undefined`       | Name attribute for the hidden input field. Enables native form integration.                                            |
+| `id`                    | `string`                                       | `undefined`       | ID attribute for the hidden input field.                                                                               |
+| `ignoreSelectionChange` | `boolean`                                      | `false`           | If true, `onChange` will not be triggered when only the selection changes (e.g. clicking/caret movement).              |
+| `rows`                  | `number`                                       | `undefined`       | Specifies the height of the editor in rows. Acts as fixed height when `autoResize` is false, and min-height when true. |
+| `cols`                  | `number`                                       | `undefined`       | Specifies the width of the editor in characters (`ch` unit).                                                           |
+| `resize`                | `boolean`                                      | `false`           | Enables a manual vertical resize handle on the editor.                                                                 |
+| `autoResize`            | `boolean`                                      | `false`           | If true, the editor height automatically adjusts to fit the content.                                                   |
 
 ### Toolbar Configuration
 
@@ -446,6 +486,10 @@ interface ReactLexicalEditorProps {
   name?: string;
   id?: string;
   ignoreSelectionChange?: boolean;
+  rows?: number;
+  cols?: number;
+  resize?: boolean;
+  autoResize?: boolean;
 }
 
 interface ToolbarConfig {
