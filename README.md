@@ -18,10 +18,17 @@ A powerful, feature-rich WYSIWYG editor built with [Lexical](https://lexical.dev
 - ♿ **Accessible** - Keyboard navigation and screen reader support
 - 🎯 **TypeScript** - Full TypeScript support with type definitions
 
-## 🎮 Live Demo
+## 🎮 Demo
 
-Experience the full capabilities of the editor in our live demo environment:
+Experience the full capabilities of the editor in the hosted demo:
 [**Live Demo Website**](https://demo-react-lexical-text-editor.vercel.app/)
+
+For local development, run the internal playground with hot reload:
+
+```bash
+npm install
+npm run dev
+```
 
 Try out features like:
 
@@ -878,7 +885,13 @@ function EmailTemplateEditor() {
 # Install dependencies
 npm install
 
-# Build the package
+# Run the local playground with HMR
+npm run dev
+
+# Run type checks for library and playground
+npm run typecheck
+
+# Build the publishable library
 npm run build
 
 # The output will be in the dist/ folder
@@ -886,35 +899,24 @@ npm run build
 
 ### Testing Locally
 
-#### Method 1: Using npm pack
+#### Internal Playground
 
 ```bash
 # In the package directory
-npm pack
-
-# This creates react-lexical-text-editor-1.0.0.tgz
-# In your test project
-npm install /path/to/react-lexical-text-editor-1.0.0.tgz
+npm install
+npm run dev
+npm run typecheck
 ```
 
-#### Method 2: Using npm link
+This starts a Vite playground on localhost that imports the editor directly from `src/`, so edits update immediately without rebuilding the package first.
+
+#### Smoke Test the Publish Output
 
 ```bash
 # In the package directory
-npm link
-
-# In your test project
-npm link react-lexical-text-editor
-```
-
-#### Method 3: Using yarn
-
-```bash
-# In the package directory
+npm run typecheck
+npm run build
 npm pack
-
-# In your test project
-yarn add file:/path/to/react-lexical-text-editor-1.0.0.tgz
 ```
 
 ## 🐛 Troubleshooting
